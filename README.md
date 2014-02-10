@@ -1,12 +1,11 @@
-IFC4 Coordination View
-======================
+## Overview on IFC4 Coordination Views
 
-The goal of this project is to specify the subset of the [new IFC4 release] (http://www.buildingsmart-tech.org/specifications/ifc-releases/ifc4-release/ifc4-release-summary) that supports  coordination activities, also known as Coordination View. The work will be based on the [IFC2x3 CV] (http://www.buildingsmart-tech.org/certification/ifc-certification-2.0/ifc2x3-cv-v2.0-certification/ifc2x3-cv-v2.0-certification-summary) that is currently used by buildingSMART for software certification. Two correlated partial views will be developed:
-* Design handover view 
-* Reference view
+The goal of this project is to specify the subset of the [new IFC4 release] (http://www.buildingsmart-tech.org/specifications/ifc-releases/ifc4-release/ifc4-release-summary) that supports  coordination activities, also known as Coordination View. The work will be based on the [IFC2x3 CV] (http://www.buildingsmart-tech.org/certification/ifc-certification-2.0/ifc2x3-cv-v2.0-certification/ifc2x3-cv-v2.0-certification-summary) that is currently used by buildingSMART for software certification. In stead of developing another single IFC4 Coordination View, this project proposes to develop two correlated partial views:
+* IFC4 Reference view
+* IFC4 Design handover view 
 
 
-Purpose of the IFC4 Coordination Views
+**Purpose of the IFC4 Coordination Views**
 
 The goal of these model views is to represent building design information that may be delivered across disciplines in design, construction, and operations. These model views are limited to physical building products and systems, and exclude all other lifecycle information (actors, controls, processes, resources). This model view may reference type definition information used by a building (e.g. common geometry for product models), but does not encapsulate product libraries – a separate Model View may be defined for that in the future. Full connection information is within scope (element connections, ports, interference relationships), as is decomposition information (aggregation, voiding, filling).
 
@@ -15,7 +14,7 @@ Several model views are defined with increasing levels of design intent: Referen
 Each of these model views will be explicitly defined in mvdXML format, which enables automation of implementations: if application software is designed to support IFC and mvdXML, then it can theoretically support any model view automatically. Automated filtering, translation, importing, exporting, validation, and user interface customization are possible.
  
  
-IFC4 Reference View
+### IFC4 Reference View
 
 The overall goal of the Reference View is to provide building information that may be consumed by the widest array of software applications that do not require modifying geometry. Such applications enable viewing, estimating, building, operating, and other downstream analysis. The target scenario is an architect providing building design information to a contractor or facility manager. It is expected that the resulting geometry would reflect sufficient realism for viewing in software (dimensions, normals, colors, textures), but not of rendering quality for artistic presentations (lighting, shader effects, curve interpolation, rasterizing).
 
@@ -24,7 +23,7 @@ To support the widest array of consuming applications, the resulting schema shou
 As the Reference View is new (there is no corresponding concept in the IFC2x3 Coordination View), there is no constraint for compatibility, and the resulting schema will leverage new triangulation definitions in IFC4 to support more efficient data transfer.
  
 
-IFC4 Design Handover View
+### IFC4 Design Handover View
 
 The overall goal of the Design Handover View is to provide building information with support for editing of interconnected elements. Such applications enable inserting, deleting, moving, and modifying physical building elements and spaces. The target scenario is an architect providing building design information to an engineer for a particular discipline, where geometric modifications may need to be made.
 
@@ -33,7 +32,7 @@ To enable such editing, higher-level design parameters must be preserved, and ap
 As the Design Handover View is intended to be compatible with the IFC2x3 Coordination View, every effort will be made to retain such compatibility while supporting new IFC4 concepts where applicable that enhance editing capability (e.g. IfcMaterialProfileSet, IfcAdvancedBrep).
  
 
-IFC4 Parametric View [Illustrative]
+### IFC4 Parametric View [Illustrative]
 
 The overall goal of the Parametric View is to provide building information that may be fully edited by design applications independently of any specific parameters or formulas for calculating geometry.
 
