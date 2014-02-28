@@ -16,11 +16,7 @@ Each of these model views will be explicitly defined in mvdXML format, which ena
  
 ### IFC4 Reference View
 
-The overall goal of the Reference View is to provide building information that may be consumed by the widest array of software applications that do not require modifying geometry. Such applications enable viewing, estimating, building, operating, and other downstream analysis. The target scenario is an architect providing building design information to a contractor or facility manager. It is expected that the resulting geometry would reflect sufficient realism for viewing in software (dimensions, normals, colors, textures), but not of rendering quality for artistic presentations (lighting, shader effects, curve interpolation, rasterizing).
-
-To support the widest array of consuming applications, the resulting schema should be as limited as possible for representing geometry in the interest of minimizing resources required of application developers. Such schema should also be as compact as possible to enable downstream use on mobile devices with limited network bandwidth. It is proposed that the resulting geometry is limited to triangles with normal vectors and texture coordinates (IfcTriangulatedFaceSet).
-
-As the Reference View is new (there is no corresponding concept in the IFC2x3 Coordination View), there is no constraint for compatibility, and the resulting schema will leverage new triangulation definitions in IFC4 to support more efficient data transfer.
+See [IFC4 Reference View Specification] (https://github.com/BuildingSMART/IFC4-CV/blob/master/IFC4_Reference_View.md)
  
 
 ### IFC4 Design Handover View
