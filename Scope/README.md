@@ -13,11 +13,12 @@ It includes a general overview about the aim of splitting the coordination view 
 
 ## Detailed scope definition
 
-- [latest version]  (https://github.com/BuildingSMART/IFC4-CV/blob/master/Scope/P2%20DetailedScopeIFC4CoordinationView%20V0.5.pdf)
+- [latest version]  (https://github.com/BuildingSMART/IFC4-CV/blob/master/Scope/P2%20DetailedScopeIFC4CoordinationView%20V0.6.pdf)
 
   The detailed scope defines the root concepts and concept templates defined in terms of a mindmap. 
 
 ### Version history:
+- [Version 0.6]  (https://github.com/BuildingSMART/IFC4-CV/blob/master/Scope/P2%20DetailedScopeIFC4CoordinationView%20V0.6.pdf) - update of the IFC Reference View concept tempates in general
 - [Version 0.5] (https://github.com/BuildingSMART/IFC4-CV/blob/master/Scope/P2%20DetailedScopeIFC4CoordinationView%20V0.5.pdf) - update of the IFC Reference View geometry concepts
 - [Version 0.4] (https://github.com/BuildingSMART/IFC4-CV/blob/master/Scope/P2%20DetailedScopeIFC4CoordinationView%20V0.4.pdf) - first publication and request for comments
 - up to version 0.4 - internal work declare the anticipated scope of the two views
