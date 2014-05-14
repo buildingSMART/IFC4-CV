@@ -8,7 +8,7 @@ The goal of this project is to specify the subset of the [new IFC4 release] (htt
 ## Available documentation
 
 ### General information on scope
-- [latest powerpoint overview] (https://github.com/BuildingSMART/IFC4-CV/blob/master/Scope/P2%20GeneralScopeIFC4CordinationView%2020140423)
+- [latest powerpoint overview] (https://github.com/BuildingSMART/IFC4-CV/blob/master/Scope/P2%20GeneralScopeIFC4CordinationView%2020140423.pdf)
   The general scope statement defines the requirements on the two successors of the coordination view from the IFC exchange work flow perspective and from the expected user experience.
 
 - [latest version of mindmap]  (https://github.com/BuildingSMART/IFC4-CV/blob/master/Scope/P2%20DetailedScopeIFC4CoordinationView%20V0.6.pdf)
