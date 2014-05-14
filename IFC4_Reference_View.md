@@ -7,7 +7,7 @@ To be updated from [standard foreword boiler plate text] (http://www.buildingsma
 ## Purpose
 With the publication of the IFC4 release, that has been accepted as ISO16739 by the International Standardization Organization, several enhancements and improvements over the previous IFC releases are now available for improved open BIM interoperability using the IFC protocol.
 
-The main purpose of this document is to define a standardized subset of the IFC4 schema, a Model View Definition MVD, that is particularly suitable for all BIM workflows that are based on reference models, where the exchange is mainly one-directional. Here requested modifications of the BIM data, mainly of the shape representation, are handled by a change request to the original author, and changes not executed upon the imported IFC data to be sent back to the original source.
+The main purpose of this document is to define a standardized subset of the IFC4 schema, a Model View Definition MVD, that is particularly suitable for all BIM workflows that are based on reference models, where the exchange is mainly one-directional. Here requested modifications of the BIM data, mainly of the shape representation, are handled by a change request to the original author, and changes ae not executed upon the imported IFC data with the intent to be sent back to the original source.
 
 Examples of this reference workflow are:
 - Coordination planning (combining different discipline specific IFC models for visual checking)
@@ -55,7 +55,7 @@ The overall goal of the IFC Reference View is to provide workflows where buildin
 
 > EXAMPLE One target scenario is an architect providing building design information to a contractor or facility manager. It is expected that the resulting geometry would reflect sufficient realism for viewing in software (dimensions, normals, colors, textures), but not of rendering quality for artistic presentations (lighting, shader effects, curve interpolation, rasterizing).
 
-To support the widest array of consuming applications, the resulting schema should be as limited as possible for representing geometry in the interest of minimizing resources required of application developers. Such schema should also be as compact as possible to enable downstream use on mobile devices with limited network bandwidth. It is proposed that the resulting geometry is limited to triangles with normal vectors and texture coordinates and simple sweeped solids with applied textures.
+To support the widest array of consuming applications, the resulting schema should be as limited as possible for representing geometry in the interest of minimizing resources required of application developers. Such schema should also be as compact as possible to enable downstream use on mobile devices with limited network bandwidth. It is proposed that the resulting geometry is limited to triangles with normal vectors, colour and texture coordinates and simple sweeped solids with applied colour and texture.
 
 ## Compatibility concerns
 
@@ -70,37 +70,43 @@ Complying software interfaces, that implements import of the IFC4 Design Transfe
 # 1 Scope
 
 ## 1.1 General scope definition
-The general scope defines the main functionalities of the IFC4 Reference View as an overview. It includes a complete listing of the model elements and model element types that are included in the Model View Definition.
+The general scope defines the main functionalities of the IFC4 Reference View as an overview. It includes a complete listing of the model elements and model element types that are included in the IFC4 Reference View MVD.
+ 
+> NOTE The Model elements are refered to in MVD as root concepts, being the indivudual root elements, that contain the attributes, geometric shapes, dynamic property sets and other semantic information. 
 
 The detailed scope of the IFC4 Reference View is determined by the concept templates that are included. A detailed description of each concept template is provided by "4 Fundamental concepts and assumptions".
 
 ## 1.2 Model elements
 The main components of the IFC4 Reference View are the semantic model elements that carry a predefined meaning. The complete breakdown of all model elements declared in IFC4 are also known as the IFC4 built-in classification following an element by function classification.
 
+In addition to each of the Model elements shown here in the subsequent tables, each Model element maybe further specialized by its "_PredefinedType_", or even a user defined type.
+
+> EXAMPLE  An _IfcFireSuppressionTerminal_ is a specific Model element, that may be further specialized using its _PredefinedType_ Enumeration to be: a sprinkler, a hose reel, a fire hydrant, or a breeching inlet. If a proper predefined type is not yet included, a user defined type can be assigned as well.
+ 
 **Architectural model elements**
 
-| shell and core | finishing, etc. |
-|----------------|-----------------|
-| IfcBeam        | IfcCovering 
-| IfcColumn      | IfcRailing
-| IfcChimney *   | IfcShadingDevice
-| IfcRamp +      | IfcCurtainWall
-| IfcStair ++    | IfcDoor
-| IfcRoof        | IfcWindow
-| IfcSlab        | IfcFurniture
-| IfcWall        | IfcSystemFurnitureElement
+| shell and core   | finishing          | furnishing
+|------------------|--------------------|-----------
+| _IfcBeam_        | _IfcCovering_      | _IfcFurniture_
+| _IfcColumn_      | _IfcRailing_       | _IfcSystemFurnitureElement_
+| _IfcChimney_ *   | _IfcShadingDevice_ | -
+| _IfcRamp_ +      | _IfcCurtainWall_   | -
+| _IfcStair_ ++    | _IfcDoor_          | -
+| _IfcRoof_        | _IfcWindow_        | -
+| _IfcSlab_        | -                  | -
+| _IfcWall_        | -                  | -
 
 > Legend: * new in IFC4, + includes IfcRampFlight, ++ includes IfcStairFlight
 
 
 **Structural model elements**
 
-| Foundation & Frame | Reinforcement      | Fastener, etc. |
-|--------------------|--------------------|----------------|
-| IfcFooting         | IfcReinforcingBar  | IfcFastener
-| IfcPile            | IfcReinforcingMesh | IfcMechanicalFastener
-| IfcMember          | IfcTendonAnchor    | IfcBuildingElementPart
-| IfcPlate-          | IfcTendon          | IfcDiscreteAccessory
+| Foundation & Frame   | Reinforcement        | Fastener, etc. |
+|----------------------|----------------------|----------------|
+| _IfcFooting_         | _IfcReinforcingBar_  | _IfcFastener_
+| _IfcPile_            | _IfcReinforcingMesh_ | _IfcMechanicalFastener_
+| _IfcMember_          | _IfcTendonAnchor_    | _IfcBuildingElementPart_
+| _IfcPlate_           | _IfcTendon_          | _IfcDiscreteAccessory_
 
 > NOTE: Architectural elements, like IfcWall, IfcSlab, IfcBeam, etc, are also used in structural models, and vice versa
 
@@ -120,82 +126,82 @@ The internal specialization structure for building service elements at its highe
 
 The following tables intents to assign the model elements to the various disciplines within the building service system domain.
 
-| general MEP elements  | used for gases and fluids | ports for connectivity |
-| ----------------------|---------------------------|------------------------|
-| IfcEngine *           | IfcFlowMeter *            | IfcDistributionPort    |
-| IfcMedicalDevice *    | IfcFilter *               | -                      |
-| IfcUnitaryEquipment * | -                         | -                      |
+| general MEP elements    | used for gases and fluids   | ports for connectivity |
+| ------------------------|-----------------------------|------------------------|
+| _IfcEngine_ *           | _IfcFlowMeter_ *            | _IfcDistributionPort_  |
+| _IfcMedicalDevice_ *    | _IfcFilter_ *               | -                      |
+| _IfcUnitaryEquipment_ * | -                           | -                      |
 
 
-| Heating, Cooling   | Plumbing                     | Common         |
-|--------------------|------------------------------|----------------|
-| IfcBoiler *        | IfcFireSuppressionTerminal * | IfcPipeSegment *
-| IfcBurner *        | IfcInterceptor *             | IfcPipeFitting *
-| IfcCoil *          | IfcSanitaryTerminal *        | IfcPump *
-| IfcSpaceHeater *   | IfcStackTerminal *           | IfcValve *
-| IfcTubeBundle *    | IfcTank *                    | -
-| -                  | IfcWasteTerminal *           | -
+| Heating, Cooling     | Plumbing                       | Common         |
+|----------------------|--------------------------------|----------------|
+| _IfcBoiler_ *        | _IfcFireSuppressionTerminal_ * | _IfcPipeSegment_ *
+| _IfcBurner_ *        | _IfcInterceptor_ *             | _IfcPipeFitting_ *
+| _IfcCoil_ *          | _IfcSanitaryTerminal_ *        | _IfcPump_ *
+| _IfcSpaceHeater_ *   | _IfcStackTerminal_ *           | _IfcValve_ *
+| _IfcTubeBundle_ *    | _IfcTank_ *                    | -
+| -                    | _IfcWasteTerminal_ *           | -
 
 
-| Ventilation         | Air conditioning          | Common
-| --------------------|---------------------------|-------
-| IfcAirTerminalBox * | IfcAirToAirHeatRecovery * | IfcDuctSegment *
-| IfcDamper *         | IfcChiller *              | IfcDuctFitting *
-| IfcDuctSilencer *   | IfcCondenser *            | IfcAirTerminal *
-| -                   | IfcCooledBeam *           | IcFan *
-| -                   | IfcCoolingTower *         | -
-| -                   | IfcEvaporativeCooler *    | -
-| -                   | IfcEvaporator *           | -
-| -                   | IfcHeatExchanger *        | -
-| -                   | IfcHumidifier *           | -
-| -                   | IfcCompressor *           | -
+| Ventilation           | Air conditioning            | Common
+| ----------------------|-----------------------------|-------
+| _IfcAirTerminalBox_ * | _IfcAirToAirHeatRecovery_ * | _IfcDuctSegment_ *
+| _IfcDamper_ *         | _IfcChiller_ *              | _IfcDuctFitting_ *
+| _IfcDuctSilencer_ *   | _IfcCondenser_ *            | _IfcAirTerminal_ *
+| -                     | _IfcCooledBeam_ *           | _IfcFan_ *
+| -                     | _IfcCoolingTower_ *         | -
+| -                     | _IfcEvaporativeCooler_ *    | -
+| -                     | _IfcEvaporator_ *           | -
+| -                     | _IfcHeatExchanger_ *        | -
+| -                     | _IfcHumidifier_ *           | -
+| -                     | _IfcCompressor_ *           | -
 
 
-| Electrical                     | cont.                       | Common
-|--------------------------------|-----------------------------|-------
-| IfcElectricAppliance *         | IfcAudioVisualAppliance *   | IfcCableSegment *
-| IfcElectricDistributionBoard * | IfcCommunicationAppliance * | IfcCableFitting *
-| IfcElectricGenerator *         | IfcJunctionBox *            | IfcCableCarrierSegment *
-| IfcElectricMotor *             | IfcLamp *                   | IfcCableCarrierFitting *
-| IfcElectricStorageDevice *     | IfcLightFixture *           | -
-| IfcElectricTimeControl *       | IfcSolarDevice *            | -
-| IfcMotorConnection *           | IfcSwitchingDevice *        | -
-| IfcProtectiveDevice *          | IfcTransformer *            | -
+| Electrical                       | cont.                         | Common
+|----------------------------------|-------------------------------|-------
+| _IfcElectricAppliance_ *         | _IfcAudioVisualAppliance_ *   | _IfcCableSegment_ *
+| _IfcElectricDistributionBoard_ * | _IfcCommunicationAppliance_ * | _IfcCableFitting_ *
+| _IfcElectricGenerato_r *         | _IfcJunctionBox_ *            | _IfcCableCarrierSegment_ *
+| _IfcElectricMotor_ *             | _IfcLamp_ *                   | _IfcCableCarrierFitting_ *
+| _IfcElectricStorageDevice_ *     | _IfcLightFixture_ *           | -
+| _IfcElectricTimeControl_ *       | _IfcSolarDevice_ *            | -
+| _IfcMotorConnection_ *           | _IfcSwitchingDevice_ *        | -
+| _IfcProtectiveDevice_ *          | _IfcTransformer_ *            | -
 
 
-| Building automation   | cont.                              | cont.
-|-----------------------|-----------------------------------|------
-| IfcActuator *         | IfcFlowInstrument *               | IfcSensor *
-| IfcAlarm *            | IfcProtectiveDeviceTrippingUnit * | -
-| IfcController *       | IfcUnitaryControlElement *        | -
+| Building automation     | cont.                               | cont.
+|-------------------------|-------------------------------------|------
+| _IfcActuator_ *         | _IfcFlowInstrument_ *               | _IfcSensor_ *
+| _IfcAlarm_ *            | _IfcProtectiveDeviceTrippingUnit_ * | -
+| _IfcController_ *       | _IfcUnitaryControlElement_ *        | -
 
-> Legend * new in IFC4, note all building service occurrence elements are new, the previous IFC2x3 release only included the generic occurrence elements: _IfcFlowSegment_, _IfcFlowFitting_, _IfcFlowTerminal_, _IfcFlowMovingDevice_, _IfcFlowStorageDevice_, _IfcFlowController_, _IfcEnergyConversionDevice_ and _DistributionControlElement_
+> Legend * new in IFC4, note all building service occurrence elements are new, the previous IFC2x3 release only included the generic occurrence elements: _IfcFlowSegment_, _IfcFlowFitting_, _IfcFlowTerminal_, _IfcFlowMovingDevice_, _IfcFlowStorageDevice_, _IfcFlowController_, _IfcEnergyConversionDevice_ and _DistributionControlElement_. Those are still available as general purpose MEP Model elements, but its use is discouraged.
  
 
 **Other model elements**
 
 | Other elements |
 |----------------|
-| IfcBuildingElementProxy +
-| IfcCivilElement *++
-| IfcGeographicElement *
-| IfcDistributionChamberElement
-| IfcElementAssembly
-| IfcTransportElement
+| _IfcBuildingElementProxy_ +
+| _IfcCivilElement_ *++
+| _IfcGeographicElement_ *
+| _IfcDistributionChamberElement_
+| _IfcElementAssembly_
+| _IfcTransportElement_
 
 > Legend: * new in IFC4, + also used as general element proxy ++ provided as stub for future infrastructure extensions
 
 
 **Spatial elements, spatial structure and grouping elements**
 
-| Spatial structure | other structure          | others  |
-|-------------------|--------------------------|---------|
-| IfcSpace          | IfcZone                  | IfcGrid
-| IfcBuildingStorey | IfcSystem                |
-| IfcBuilding       | IfcBuildingSystem *      |
-| IfcSite           | IfcDistributionSystem *  |
-| IfcSpatialZone *+ | IfcDistributionCircuit * |
-|                   | IfcGroup                 |
+| Spatial structure   | other grouping structure   | others  |
+|---------------------|----------------------------|---------|
+| _IfcSpace_          | _IfcZone_                  | _IfcGrid_
+| _IfcBuildingStorey_ | _IfcSystem_                | -
+| _IfcBuilding_       | _IfcBuildingSystem_ *      | -
+| _IfcSite_           | _IfcDistributionSystem_ *  | -
+| _IfcSpatialZone_ *+ | _IfcDistributionCircuit_ * | -
+| -                   | _IfcGroup_                 | -
 
 > Legend: * new in IFC4, + provided as a stub for non vertical constructions
 
@@ -208,6 +214,8 @@ Model element types are part of the IFC4 Reference View. They enable to describe
 
 > EXAMPLE: A particular air outlet as an article, with its shape, its material and its manufacturer information being described once as a type and then having several occurrences, each placed within the building, referencing the same type and hence its shape, material and properties.
 
+Most of the Model elements introduced in the previous session have a corresponding Model element type, such as _IfcWall_ - _IfcWallType_, _IfcFastener_ - _IfcFastenerType_, _IfcFan_ - _IfcFanType_. Only the following spatial structure elements _IfcSite_, _IfcBuilding_, _IfcBuildingStorey_, the grouping elements _IfcGroup_, _IfcZone_, _IfcSystem_ (and subtypes), and the _IfcDistributionPort_ and _IfcGrid_ do not have matching element types.  
+
 
 ## 1.4 Overview on major concepts used
 
@@ -215,7 +223,7 @@ Model element types are part of the IFC4 Reference View. They enable to describe
 All model elements, listed in the previous section, are defined by several generic and direct object attributes, some specific model elements do carry additional direct attributes. The usage of the direct generic attributes is defined within the following concept templates (see also Chapter 4 "fundamental concepts and assumptions"):
 - "_Software Identity_", it defines how to apply the Globally Unique Id and how to compress it during exchange;
 - "_User identity_", it defins the meaning of _Name_, _Description_, _LongName_ and _Tag_ attributes;
-- "_Object occurrence predefined type_", it defines how to use the _PredefinedType_ and in case of user defined types, how to assign the user defined type information within the _ObjectType_ attribute for occurrences of model elements;
+- "_Object Occurrence Predefined Type_", it defines how to use the _PredefinedType_ and in case of user defined types, how to assign the user defined type information within the _ObjectType_ attribute for occurrences of model elements;
 - "_Element type predefined type_" it defines how to use the _PredefinedType_ and in case of user defined types, how to assign the user defined type information within the _ElementType_ attribute for types of model elements.
 
 
@@ -228,8 +236,15 @@ There is a single instance of _IfcProject_ within each IFC data set. It sets the
 
 
 ### 1.4.3 Object definition
-A main objective of the IFC4 Reference View is to enable rich information content for each model element. General properties or attributes are attached to model elements as propert sets, either directly to the model element occurrence, or to its type.
+A main objective of the IFC4 Reference View is to enable rich information content for each model element. Model element occurrences can refer to their model element types for sharing common information. General properties are attached to model elements as property sets, either directly to the model element occurrence, or to its type. Individual model element occurrences can hold their quantities, if those are pre-calculated by the sender of the IFC data set. The usage of the object definition is defined within the following concept templates (see also Chapter 4 "fundamental concepts and assumptions"):
+- "_Object Typing_", associates the Model element occurrences with the corresponding element type;
+- "_Property Sets_", assigns dynamically defined property sets, holding set of individual properties, to the model element occurrences of element type;
+- "_Quantity Sets_", assigns dynamically defined quantity sets, holding set of individual quantities, to the model element occurrences.
 
+#### 1.4.3.1 Object typing
+The contept template describes the mechnism of associating model element occurrences to the corresponding type and the way and restrictions of overriding type based properties by properties directly assigned to the model element occurrences.
+
+#### 1.4.3.2 Property sets
 Property sets hold, as the name suggests, a set of properties grouped by a common theme. Each individual property has:
 - a name
 - an optional description
@@ -244,16 +259,25 @@ There are two ways to declare property templates:
 
 > NOTE The PSD Schema has been used since many earlier versions of the IFC standard and has a broad legancy. The newer property set template definitions are now part of the IFC schema and can therefore be embedded within an IFC data set directly. Both schemas can be mapped without information loss.
 
+#### 1.4.3.3 Quantity sets
+Quantity sets hold, as the name suggests, a set of quantities pre calculated for the model element occurrence. Each individual quantity has:
+- a name
+- an optional description
+- a value of a given datatype corresponding to the quantity measure (length, area, volume, weight, time
+- a unit 
+- a quantity formula, describing how the quantity value was calculated
+
+The semantic meaning of each qualtity is provided by its name. Quantities, that are semantically declared within the scope of the IFC4 Reference View, are based on a quantity definition template that is published as an instrict part of the Model View Definition. Extensions to the quantity definitions can also be defined outside the quantity definition scope of the IFC4 Reference View, however the name prefix for quantity sets "Qto_" is restricted to quantities defined within the original scope of IFC.
+
 
 ### 1.4.4 Object association
-Beside using general property sets, the following model element information is handled specificly within IFC4:
-- name and description of the model element as direct attributes
-- predefined element type and user defined element type as direct attributes
-- quantities as specific quantity sets
-- classification as specific classification reference either to an external classification system, or embedding the classification within the IFC data set
-- material as either single material, and material constituent sets assigning material information, or by material layer sets and material profile sets combining material information with dimensions.
+In addition to the Property sets and the Quantity sets, also a classification reference to an external classification system can be assigned, and material as either single material, a material constituent sets or an material layer sets aor material profile sets combining material information with dimensions can be associated to one or many model elements.
 
 > NOTE Material dimensions are layer thicknesses, or profile geometries for e.g. a column with an embedded steel profile and a concrete protection. Within the IFC4 Reference View, such material dimensions are used exclusively as alphanumeric information, and not as part of a dimension driven parametric shape representation.
+
+The usage of the object association is defined within the following concept templates (see also Chapter 4 "fundamental concepts and assumptions"):
+- "_Material Association_"; assigns a material (or material set - constituent, layer, profile) to one or several model elements (either to  element occurrences, or as shared material information to element types).
+- "_Classification Association_"; assignes a classification reference to one or several model elements.
 
 
 ### 1.4.5 Product shape
@@ -262,43 +286,67 @@ The first main objective of the IFC4 Reference View is to enable the exchange of
 In order to minimize the effort for receiving and interpreting the geometic representations by the receiving software systems, in terms of development effort, processing power and loading times, the complexity and variety of geometric models has been minimized for the IFC4 Reference View.
 
 #### 1.4.5.1 Product placement
+Each model element defines its own object coordinate system. The placement is defined by the following concept template:
+- "_Local Placement_", creating an object coordinate system for the shape representation of the model element, either absolutely to the project engineering coordinate system, or relatively to another object coordination system.
 
 #### 1.4.5.2 Product geometric representation
 
-In scope of geometric shape representations of physical and spatial elements is:
-- tessellated geometry
+In scope of geometric shape representations of the 3D body geometry of physical and spatial elements are the following concept templates:
+- "_Body Tessellation Geometry_", using tessellated geometry in form of triangulated tessellations for describing the body shape of the model element;
+- "_Body SweptSolid Geometry_"; using extruded solid geometry or revolved solid geometry for describing the body shape of the model element;
+- "_Body AdvancedSweptSolid Geometry_"; using advanced swept solid geometry of circular cross sections for describing the body shape of the model element, only the swept disk solid is in scope;
 
 It is the default geometric representation of all model elements, allowing for a surface model representation with an indicator for closed shells (and therefore true volumes). The tessellated representation offers a very efficient way of exchanging 3D shape date, both for data set sizes and for processing time. Optionally the face normals can be exchanged as well.
 
 Since curved shapes would lead to very densely triangulated areas, the following swept solid based representations are also in scope of the IFC4 Reference View, balancing simplicity and compactness of representation:
 
-- extruded solid geometry
-- revolved solid geometry
-- advanced swept solid geometry of circular cross sections
-
 All other geometric models are out of scope of the IFC4 Reference View, in particular Boolean operations required for Constructive Solid Geometry CSG.
 
 > NOTE: The IFC2x3 Coordination View included CSG capabilities, the IFC4 Reference View therefore imposes a more restricted geometric representation of model elements. The IFC4 Design Transfer View should be used, if more complex geometric representations are required by the workflow. In particular, if a dimension-driven parametric representation, used by the IFC4 standard case elements, is needed.
 
-The geometric shape representation can either be directly assigned to a model element, or to its type. In case of type-based geometry, a fifth representation type is used at the model element:
-- mapped representation
+The geometric shape representation can either be directly assigned to a model element, or to its type. In case of type-based geometry, a the following representation type is used at the model element using the following concept template:
+- "_Mapped Geometry_", mapped representation defined at the corresponding element type. A mapped representation uses Cartesian transformation operations to place the type-based geometry within its  object coordinate system.
 
-A mapped representation uses Cartesian transformation operations to place the type-based geometry within its  object coordinate system.
+As an exception, the following elements, _IfcGrid_ and _IfcSpace_, _IfcSpatialZone_ may have an additional foot print 2D geometry (in case of _IfcGrid_ this is the only geometric representation. It is described in the following concept template:
+- "FootPrint Geometry", defining a 2D shape representation within the XY plane of the object coordinate system.
 
 #### 1.4.5.3 Geometric presentation
 Visual appearance is an important factor for the communication process using BIM data. The objective is not to support photo-realistic rendering of reference models, but to use color, basic rendering, and texture information to add visually accessible meaning to the model elements.
  
-In scope of presentation capabilities for the appearance of model element shapes are:
-- coloring, as single color or rendering per solid, or as one color per face
-- texturing
+In scope of presentation capabilities for the appearance of model element shapes are the following partial concept templates:
+- "_Surface Style Shading_", applying a single coloring for each solid;
+- "_Surface Style Rendering_", applying a single rendering (color, transparency, reflection, etc.) for each solid; 
+- "_Surface Style textures_", applying a single texture for each solid according to a texture mapping based on the solid type; 
+- "_Suface style tessellation_", applying a color and/or texture for each face of a tessellated solid.
 
-The visually adaquate presentation of model elements is constraint by the shapre representation
+The visually adaquate presentation of model elements is constraint by the shape representation
 - for tessellated geometry: color per face, texture per face
 - for swept solid geometry: color and rendering information per solid, texture applied to solid using standard mapping
 
 
 ### 1.4.6 Object Composition
 
+The object composition functionality describes the product breakdown structure of model elements within an IFC data set, with separate breakdown structures for physical elements and spatial elements. Physical element structures describe parts and assemblies, spatial element structures describe vertical structures (for buildings) and horizontal structures (for other assets - as a stub in this release). A specific type of decomposition is the voiding - a subtraction of a void from a physical element. Another specific type is the nesting of ports within a distribution elements.
+
+The usage of the object association is defined within the following concept templates (see also Chapter 4 "fundamental concepts and assumptions"):
+- "_Element Aggregation_", creating a hierarchical product breakdown structure relationship between assemblies and parts;  
+- "_Spatial Aggregation_", creating a hierarchical spatial decomposition relationship between spatial structure elements;
+- "_Element Voiding_", creating a voiding relationship between a physical element and penetrating voids - within the scope of the IFC4 Reference View this relationship is a logical relationship, the void is already part of the geometry of the physical element, 
+- "_Port Nesting_", creating an 1:N relationship between the physical element and one or many ports defining inlets or outlets - used for distribution elements.
+
+
 ### 1.4.7 Object Assignment
 
+The object assignment defines the assignment of objects, such as a link between model elements to groups, tasks or resources. Only the grouping assignment is in scope of the IFC4 Reference View and defined within the following concept template:
+- "_Group Assignment_", Assignment of one or several model elements to a group. It includes the more specific assignments of _Grouping General_, _Grouping to System_, and _Grouping to Zones_.
+
+
 ### 1.4.8 Object Connectivity
+
+The object connectivity defines the interlinkage between model elements. Examples are the link between physical elements and the spatial structure, where they are located, of the connection betwee the two ports of two consecutive distribution elements.
+
+The usage of the object association is defined within the following concept templates (see also Chapter 4 "fundamental concepts and assumptions"):
+- "_Spatial Structure_", defines the containment of a physical element within a spatial container;
+- "_Port Connectivity_", defines the connection and the direction of flow between two ports of consecutive distribution elements;
+- "_Building Service Connectivity_", links a spatial or distribution system to a spatial structure (such as a building section);
+- "_Element Filling_", links a filling (usually a door or window) to an opening (usually in a wall or slab). 

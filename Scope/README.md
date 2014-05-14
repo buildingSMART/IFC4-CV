@@ -7,9 +7,13 @@ This folder contains material helping to define the scope of the IFC4 coordinati
 It includes a general overview about the aim of splitting the coordination view into two sub views. It also contains a details breakdown of the leaf-note classes and required functionality supported by these classes (in mvdXML terms: the "root concepts" and "concept templates").
 
 ## General scope definition
-- [latest version] (https://github.com/BuildingSMART/IFC4-CV/blob/master/Scope/P2%20GeneralScopeIFC4CordinationView%2020140221.pdf)
+- [latest version] (https://github.com/BuildingSMART/IFC4-CV/blob/master/Scope/P2%20GeneralScopeIFC4CordinationView%2020140423.pdf)
 
   The general scope statement defines the requirements on the two successors of the coordination view from the IFC exchange work flow perspective and from the expected user experience.
+
+### Version history:
+- [Version 21-04-14]  (https://github.com/BuildingSMART/IFC4-CV/blob/master/Scope/P2%20GeneralScopeIFC4CordinationView%2020140423.pdf) - update for better differentiation between the views and certification requirements
+- [Version 0.5] (https://github.com/BuildingSMART/IFC4-CV/blob/master/Scope/P2%20GeneralScopeIFC4CordinationView%2020140221.pdf) - initial document
 
 ## Detailed scope definition
 
