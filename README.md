@@ -1,9 +1,9 @@
 # IFC4 Coordination View project overview
 
 The goal of this project is to specify the subset of the [new IFC4 release] (http://www.buildingsmart-tech.org/specifications/ifc-releases/ifc4-release/ifc4-release-summary) that supports coordination activities, also known as Coordination View. The work will be based on the [IFC2x3 CV] (http://www.buildingsmart-tech.org/certification/ifc-certification-2.0/ifc2x3-cv-v2.0-certification/ifc2x3-cv-v2.0-certification-summary) that is currently used by buildingSMART for software certification. Instead of developing another single IFC4 Coordination View, this project proposes to develop two (later three) correlated partial views:
-* IFC4 Reference View;
-* IFC4 Design Transfer View; 
-* IFC Library View [illustrative, since not part of this project]
+* [IFC4 Reference View](/IFC4_Reference_View.md)
+* [IFC4 Design Transfer View](/IFC4_DesignTransfer_View.md)
+* [IFC Library View](/IFC4_Library_View.md) [illustrative, since not part of this project]
 
 
 ## Available documentation
