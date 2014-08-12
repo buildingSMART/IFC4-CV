@@ -15,7 +15,16 @@ The goal of this project is to specify the subset of the [new IFC4 release] (htt
 - [latest version of mindmap]  (https://github.com/BuildingSMART/IFC4-CV/blob/master/Scope/P2%20DetailedScopeIFC4CoordinationView%20V0.6.pdf)
   Overall mindmap showing the scope of the IFC Reference and IFC Design Transfer View based on the Model elements and Concept templates used and showing main IFC entities included.
  
-### IFC4 Reference View
+### IFC4 Reference View (NEWS)
+
+In order to achieve a broad engagement, a public review period is set up to start today and to end on Sept 30, 2014. All necessary information, the achieved improvements, the beta version specifications, the change logs and resolved issue lists, as well as the overall objective and scope definitions are published on the buildingSMART website.
+
+- IFC4 Reference View - see [IFC4 RV at buildingsmart-tech.org] (http://www.buildingsmart-tech.org/specifications/ifc-view-definition/ifc4-reference-view)
+- IFC4 Addendum 1 - see [IFC4 Add1 at buildingsmart-tech.org] (http://www.buildingsmart-tech.org/specifications/ifc-releases/ifc4-add1-release)
+
+There you will also find a short introduction on how to join the review process, information on the issue database to be used, and how to join the new email exploder for all IFC4 related work in order to stay connected.
+
+
 
 Documentation:
 - Purpose, objective and scope, see [IFC4 Reference View Specification] (https://github.com/BuildingSMART/IFC4-CV/blob/master/IFC4_Reference_View.md)
